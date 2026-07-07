@@ -31,7 +31,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ## How to Run
 
-git clone https://github.com/yourusername/expense-tracker-backend
+git clone https://github.com/GauravSoni121/expense-tracker-backend
 
 Run MySQL
 
