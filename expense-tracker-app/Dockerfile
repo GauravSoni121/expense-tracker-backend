@@ -1,5 +1,17 @@
-FROM eclipse-temurin:17-jdk
+FROM maven:3.9.9-eclipse-temurin-17 AS build
+
 WORKDIR /app
-COPY target/expense-tracker-app-0.0.1-SNAPSHOT.jar /app/expense-tracker-app-0.0.1-SNAPSHOT.jar
+
+COPY . .
+
+RUN mvn clean package -DskipTests
+
+FROM eclipse-temurin:17-jdk
+
+WORKDIR /app
+
+COPY --from=build /app/target/expense-tracker-app-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 9090
-ENTRYPOINT ["java","-jar","expense-tracker-app-0.0.1-SNAPSHOT.jar"]
+
+ENTRYPOINT ["java","-jar","app.jar"]
